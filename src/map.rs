@@ -347,15 +347,15 @@ impl<'a, K, V> Iterator for Iter<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for Iter<'a, K, V> {
+impl<K, V> DoubleEndedIterator for Iter<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(k, v)| (k, v))
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for Iter<'a, K, V> {}
+impl<K, V> ExactSizeIterator for Iter<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for Iter<'a, K, V> {}
+impl<K, V> FusedIterator for Iter<'_, K, V> {}
 
 impl<'a, K, V> IntoIterator for &'a BTreeIndexMap<K, V> {
 	type IntoIter = Iter<'a, K, V>;
@@ -380,15 +380,15 @@ impl<'a, K, V> Iterator for IterMut<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for IterMut<'a, K, V> {
+impl<K, V> DoubleEndedIterator for IterMut<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(k, v)| (&*k, v))
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for IterMut<'a, K, V> {}
+impl<K, V> ExactSizeIterator for IterMut<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for IterMut<'a, K, V> {}
+impl<K, V> FusedIterator for IterMut<'_, K, V> {}
 
 impl<'a, K, V> IntoIterator for &'a mut BTreeIndexMap<K, V> {
 	type IntoIter = IterMut<'a, K, V>;
@@ -419,7 +419,7 @@ impl<'a, K, V> Iterator for IterSorted<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for IterSorted<'a, K, V> {
+impl<K, V> DoubleEndedIterator for IterSorted<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.inner.next_back().copied().map(|i| {
 			let (k, v) = &self.entries[i];
@@ -428,9 +428,9 @@ impl<'a, K, V> DoubleEndedIterator for IterSorted<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for IterSorted<'a, K, V> {}
+impl<K, V> ExactSizeIterator for IterSorted<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for IterSorted<'a, K, V> {}
+impl<K, V> FusedIterator for IterSorted<'_, K, V> {}
 
 pub struct IterMutSorted<'a, K, V> {
 	entries: &'a mut [(K, V)],
@@ -483,9 +483,9 @@ impl<'a, K, V> DoubleEndedIterator for IterMutSorted<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for IterMutSorted<'a, K, V> {}
+impl<K, V> ExactSizeIterator for IterMutSorted<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for IterMutSorted<'a, K, V> {}
+impl<K, V> FusedIterator for IterMutSorted<'_, K, V> {}
 
 pub struct IntoIterSorted<K, V> {
 	entries: Vec<MaybeUninit<(K, V)>>,
@@ -547,15 +547,15 @@ impl<'a, K, V> Iterator for Keys<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for Keys<'a, K, V> {
+impl<K, V> DoubleEndedIterator for Keys<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(k, _)| k)
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for Keys<'a, K, V> {}
+impl<K, V> ExactSizeIterator for Keys<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for Keys<'a, K, V> {}
+impl<K, V> FusedIterator for Keys<'_, K, V> {}
 
 pub struct Values<'a, K, V>(std::slice::Iter<'a, (K, V)>);
 
@@ -571,15 +571,15 @@ impl<'a, K, V> Iterator for Values<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for Values<'a, K, V> {
+impl<K, V> DoubleEndedIterator for Values<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(_, v)| v)
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for Values<'a, K, V> {}
+impl<K, V> ExactSizeIterator for Values<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for Values<'a, K, V> {}
+impl<K, V> FusedIterator for Values<'_, K, V> {}
 
 pub struct ValuesMut<'a, K, V>(std::slice::IterMut<'a, (K, V)>);
 
@@ -595,15 +595,15 @@ impl<'a, K, V> Iterator for ValuesMut<'a, K, V> {
 	}
 }
 
-impl<'a, K, V> DoubleEndedIterator for ValuesMut<'a, K, V> {
+impl<K, V> DoubleEndedIterator for ValuesMut<'_, K, V> {
 	fn next_back(&mut self) -> Option<Self::Item> {
 		self.0.next_back().map(|(_, v)| v)
 	}
 }
 
-impl<'a, K, V> ExactSizeIterator for ValuesMut<'a, K, V> {}
+impl<K, V> ExactSizeIterator for ValuesMut<'_, K, V> {}
 
-impl<'a, K, V> FusedIterator for ValuesMut<'a, K, V> {}
+impl<K, V> FusedIterator for ValuesMut<'_, K, V> {}
 
 pub enum Entry<'a, K, V> {
 	Vacant(VacantEntry<'a, K, V>),

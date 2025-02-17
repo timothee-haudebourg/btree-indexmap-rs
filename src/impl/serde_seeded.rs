@@ -1,6 +1,6 @@
+use crate::BTreeIndexMap;
 use serde::ser::SerializeMap;
 use serde_seeded::{de::Seed, ser::Seeded, DeserializeSeeded, SerializeSeeded};
-use crate::BTreeIndexMap;
 
 impl<K: SerializeSeeded<Q>, V: SerializeSeeded<Q>, Q> SerializeSeeded<Q> for BTreeIndexMap<K, V> {
 	fn serialize_seeded<S>(&self, seed: &Q, serializer: S) -> Result<S::Ok, S::Error>

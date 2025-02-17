@@ -1,0 +1,21 @@
+[package]
+name = "btree-indexmap"
+description = "BTree-based map data structure with stable indexes."
+repository = "https://github.com/timothee-haudebourg/btree-indexmap"
+documentation = "https://docs.rs/btree-indexmap"
+readme = "README.md"
+authors = ["Timothée Haudebourg <timothee@haudebourg.net>"]
+edition = "2021"
+rust-version = "1.80.1"
+version = "0.1.0"
+license = "Apache-2.0 OR MIT"
+
+[features]
+serde = ["dep:serde"]
+serde-seeded = ["dep:serde", "dep:serde-seeded"]
+
+[dependencies]
+raw-btree = "0.3.0"
+equivalent = "1.0.1"
+serde = { version = "1.0", optional = true }
+serde-seeded = { version = "0.1", optional = true }

@@ -1,4 +1,5 @@
 use core::fmt;
+use equivalent::Comparable;
 use raw_btree::RawBTree;
 use std::{
 	cmp::Ordering,
@@ -7,8 +8,6 @@ use std::{
 	mem::MaybeUninit,
 	ops::Index,
 };
-
-pub use equivalent::Comparable;
 
 #[derive(Clone)]
 pub struct BTreeIndexMap<K, V> {

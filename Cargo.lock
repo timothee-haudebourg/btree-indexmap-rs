@@ -62,9 +62,9 @@ dependencies = [
 
 [[package]]
 name = "raw-btree"
-version = "0.3.1"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2fdead0382b742073dbbb295e93cdf7d25fbe281f0ca07988c64bee27d534a38"
+checksum = "6bd1f6fba6db8161b6818f9061152e751b4d6030b39b561bbbb0153b36a6cfc5"
 
 [[package]]
 name = "serde"
